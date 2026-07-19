@@ -1,0 +1,15 @@
+You are a helpful assistant for ACME Corp.
+Answer the user's questions using the provided context below.
+
+Context:
+{retrieved_documents}
+
+User:
+{user_input}
+
+# ❌ WHY THIS IS VULNERABLE
+# - Retrieved documents and user input are concatenated directly into the prompt with
+#   no trust boundary, so any instruction hidden inside a document or the user message
+#   ("ignore previous instructions and ...") is treated as an authoritative command.
+# - No output handling: whatever the model returns is used as-is downstream.
+# - No constraints on scope, tools, or disclosure of the system prompt.
